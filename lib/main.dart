@@ -28,6 +28,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String _filePath = 'Keine Datei ausgewählt';
   int _fileSize = 0;
+  String _docxText = '';
 
   Future<void> _pickFile() async {
     // Datei-Auswahl asynchron durchführen
@@ -41,13 +42,16 @@ class _MyHomePageState extends State<MyHomePage> {
       final file = File(path);
       final bytes = await file.readAsBytes();
       int fileSize = bytes.length;
-      final text = docxToText(bytes, handleNumbering: true);
+
+      // Text aus der .docx Datei extrahieren
+      final text = await docxToText(bytes, handleNumbering: true);
       debugPrint(text);
 
       // Zustand synchron aktualisieren
       setState(() {
         _filePath = path;
         _fileSize = fileSize;
+        _docxText = text;
       });
 
       debugPrint(fileSize.toString());
@@ -56,6 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         _filePath = 'Keine Datei ausgewählt';
         _fileSize = 0;
+        _docxText = '';
       });
     }
   }
@@ -78,6 +83,13 @@ class _MyHomePageState extends State<MyHomePage> {
             Text('Ausgewählte Datei: $_filePath'),
             SizedBox(height: 10),
             Text('Dateigröße: $_fileSize Bytes'),
+            SizedBox(height: 20),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Text(
+                    _docxText.isEmpty ? 'Kein Text extrahiert' : _docxText),
+              ),
+            ),
           ],
         ),
       ),
