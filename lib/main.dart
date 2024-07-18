@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:docx_to_text/docx_to_text.dart';
 
 void main() {
   runApp(MyApp());
@@ -40,6 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
       final file = File(path);
       final bytes = await file.readAsBytes();
       int fileSize = bytes.length;
+      final text = docxToText(bytes, handleNumbering: true);
+      debugPrint(text);
 
       // Zustand synchron aktualisieren
       setState(() {
