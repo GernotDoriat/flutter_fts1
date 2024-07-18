@@ -91,9 +91,12 @@ class _MyHomePageState extends State<MyHomePage> {
             Text('Dateigröße: $_fileSize Bytes'),
             SizedBox(height: 20),
             Expanded(
-              child: SingleChildScrollView(
-                child: Text(
-                    _docxText.isEmpty ? 'Kein Text extrahiert' : _docxText),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SingleChildScrollView(
+                  child: Text(
+                      _docxText.isEmpty ? 'Kein Text extrahiert' : _docxText),
+                ),
               ),
             ),
           ],
