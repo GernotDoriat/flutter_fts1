@@ -1,4 +1,4 @@
-# flutter_apps
+# flutter_fts1
 
 A new Flutter project.
 
