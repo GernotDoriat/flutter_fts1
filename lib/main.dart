@@ -78,28 +78,31 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text('File Picker Demo'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: _pickFile,
-              child: Text('Datei auswählen'),
-            ),
-            SizedBox(height: 20),
-            Text('Ausgewählte Datei: $_filePath'),
-            SizedBox(height: 10),
-            Text('Dateigröße: $_fileSize Bytes'),
-            SizedBox(height: 20),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SingleChildScrollView(
-                  child: Text(
-                      _docxText.isEmpty ? 'Kein Text extrahiert' : _docxText),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              ElevatedButton(
+                onPressed: _pickFile,
+                child: Text('Datei auswählen'),
+              ),
+              SizedBox(height: 20),
+              Text('Ausgewählte Datei: $_filePath'),
+              SizedBox(height: 10),
+              Text('Dateigröße: $_fileSize Bytes'),
+              SizedBox(height: 20),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SingleChildScrollView(
+                    child: SelectableText(
+                        _docxText.isEmpty ? 'Kein Text extrahiert' : _docxText),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
